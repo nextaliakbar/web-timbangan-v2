@@ -61,13 +61,14 @@
                           <th>PROGRAM</th>
                           <th>DEPARTMENT</th>
                           <th>HAK</th>
+                          <th>2FA</th>
                           <th><i class="fas fa-cog"></i></th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr wire:target="paginate, search, nextPage, previousPage, gotoPage" 
                         wire:loading.delay.class="d-table-row" class="d-none">
-                            <td colspan="10" class="text-center py-2">
+                            <td colspan="11" class="text-center py-2">
                                 <div class="spinner-border text-primary" role="status">
                                     <span class="sr-only">Loading...</span>
                                 </div>
@@ -86,17 +87,25 @@
                             <td>{!! $usrEsa->DEPT == '' || empty($usrEsa->DEPT) ? '<span class="badge badge-danger p-2">Tidak Tersedia</span>' : $usrEsa->DEPT !!}</td>
                             <td>{!! $usrEsa->HAK == '' || empty($usrEsa->HAK) ? '<span class="badge badge-danger p-2">Tidak Tersedia</span>' : $usrEsa->HAK !!}</td>
                             <td>
-                                <button type="button" wire:click="edit('{{$usrEsa->USER}}')" class="btn btn-warning btn-sm mr-1 mb-2 mb-md-2">
+                                <div class="custom-control custom-switch">
+                                    <input wire:click="update2FA('{{$usrEsa->USER}}', {{$usrEsa->google2fa_enable}})" type="checkbox" 
+                                    class="custom-control-input" id="customSwitch-{{$usrEsa->Id}}" 
+                                        {{$usrEsa->google2fa_enable ? 'checked' : ''}}>
+                                    <label class="custom-control-label" for="customSwitch-{{$usrEsa->Id}}"></label>
+                              </div>
+                            </td>
+                            <td>
+                                <button type="button" wire:click="edit('{{$usrEsa->USER}}')" class="btn btn-sm btn-warning btn-sm mr-1">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button type="button" wire:click="confirm('{{$usrEsa->USER}}')" class="btn btn-danger btn-sm">
+                                <button type="button" wire:click="confirm('{{$usrEsa->USER}}')" class="btn btn-sm btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
                         </tr>
                         @empty
                             <tr wire:loading.remove>
-                                <td colspan="10" class="text-center text-secondary">
+                                <td colspan="11" class="text-center text-secondary">
                                     Tidak ada data yang tersedia
                                 </td>
                             </tr>

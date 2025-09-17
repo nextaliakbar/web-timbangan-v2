@@ -172,14 +172,14 @@
                         {{$dataTimbang->links()}}
                     </div>
                     </div>
-                    <button type="submit" class="btn btn-success btn-block btn-lg mt-2" wire:loading.attr="disabled">
+                    <button id="synchronize" type="submit" class="btn btn-success btn-block btn-lg mt-2" wire:loading.attr="disabled">
                         <b>Hasil Timbang</b>
                     </button>
                 </div>
             </div>
         </div>
         </section>
-        <div wire:target="store, forceStore, printInvc, confirm" wire:loading.delay.class.remove="d-none" id="loading-overlay" class="loading-overlay d-none">
+        <div wire:target="store, forceStore, printInvc, confirm, synchronize" wire:loading.delay.class.remove="d-none" id="loading-overlay" class="loading-overlay d-none">
             <div class="spinner-border text-info" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
@@ -354,10 +354,17 @@
         });
 
         $wire.on('printInvc', (evt)=> {
-                $('#loading-overlay').addClass('d-none');
-                window.open(evt.url, '_blank');
-            });
+            $('#loading-overlay').addClass('d-none');
+            window.open(evt.url, '_blank');
+        });
     
+        $('#synchronize').on('click', ()=> {
+            Swal.fire({
+                title: 'Peringatan',
+                text: 'Development',
+                icon: 'warning'
+            });
+        });
 
         });
     </script>

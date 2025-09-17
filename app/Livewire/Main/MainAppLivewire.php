@@ -362,4 +362,7 @@ class MainAppLivewire extends Component
 
         $this->dispatch('printInvc', url: $url);
     }
+
+    public function synchronize()
+    {}
 }

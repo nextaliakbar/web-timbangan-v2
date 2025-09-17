@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Livewire\Auth;
-
-use App\Models\UserEsa;
-use Illuminate\Validation\ValidationException;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class TwoFactorLivewire extends Component
@@ -54,6 +52,8 @@ class TwoFactorLivewire extends Component
     public function confirmActivateCode($activateCode)
     {
         $user = session()->get('user-esa-from-2fa');
+        $user->google2fa_timeout = Carbon::now();
+        $user->save();
 
         $google2fa = app('pragmarx.google2fa');
         

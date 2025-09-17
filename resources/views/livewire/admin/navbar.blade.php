@@ -26,7 +26,9 @@
             {{auth()->guard('admin')->user()->USER}} | {{auth()->guard('admin')->user()->userEsaRole->role}}
           </span>
           <div class="dropdown-divider"></div>
-          <div class="dropdown-divider"></div>
+          <button wire:click="refresh" class="dropdown-item">
+            <i class="fas fa-cog mr-2"></i> Pengaturan 2FA
+          </button>
           <button class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-sign-out-alt mr-2"></i> Keluar
           </button>
@@ -35,6 +37,33 @@
     </ul>
   </nav>
   <!-- /.navbar -->
+  <div wire:ignore.self class="modal fade" id="faModal">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <label>Hari</label>
+            <input wire:model="timeOut2FA" type="text" class="form-control text-center"
+            oninput="this.value = this.value.replace(/[^1-9]/g, '').replace(/(\..*)\./g, '$1')">
+            <p>
+              Atur batas waktu agar pengguna yang diizinkan verifikasi 2FA melakukan kembali aktivasi kode
+            </p>
+            <button wire:click="updateTimeOut2FA" class="btn btn-md btn-primary w-100">
+              <span wire:loading.remove wire:target="updateTimeOut2FA">
+                  <i class="fas fa-undo mr-2"></i>
+                  Perbarui
+              </span>
+              <span wire:loading wire:target="updateTimeOut2FA">
+                  <i class="fas fa-spinner fa-spin mr-2"></i> 
+                  Loading...
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+  </div>
   <div wire:ignore.self class="modal fade" id="logoutModal">
       <div class="modal-dialog modal-md">
         <div class="modal-content">
@@ -56,6 +85,20 @@
 @script
   <script>
     $(document).ready(()=>{
+      $wire.on('openFaModal', ()=> {
+        $('#faModal').modal('show');
+      });
+
+      $wire.on('successUpdateTimeOut2FA', (evt)=> {
+        $('#faModal').modal('hide');
+        Swal.fire({
+            title: evt.title,
+            text: evt.text,
+            icon: evt.icon,
+            heightAuto: false
+        });
+      });
+
       $wire.on('errorModal', (evt)=> {
         Swal.fire({
             title: evt.title,

@@ -114,6 +114,16 @@ class UserTimbanganLivewire extends Component
         $this->resetPage();
     }
 
+    public function update2FA($userEsaNik, $google2faEnable)
+    {
+        UserEsa::where('USER', '=', $userEsaNik)
+        ->update([
+            'google2fa_enable' => !$google2faEnable
+        ]);
+
+        $this->dispatch('successUpdateData', title: 'Sukses', text: 'Status 2FA berhasil diperbarui', icon: 'success');
+    }
+
     private function refresh()
     {
         $this->resetValidation();

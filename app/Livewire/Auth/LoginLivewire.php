@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Auth;
 
+use App\Models\Setting;
 use App\Models\UserEsa;
 use App\Models\UserRole;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -26,6 +28,10 @@ class LoginLivewire extends Component
 
     /**
      * Summary of login
+     * Jika izin 2fa pengguna diizinkan dan timeout 2fa belum melewati waktu sekarang
+     * Aktivasi kode tidak dilakukan.
+     * Jika izin 2fa pengguna diizinkan dan timeout 2fa sudah melewati waktu sekarang
+     * Aktivasi kode dilakukan.
      * @return void
      */
     public function login()
@@ -36,19 +42,28 @@ class LoginLivewire extends Component
         ]);
         
         $userEsa = UserEsa::where('USER', '=',$this->nik)->first();
+
         if ($userEsa && hash('sha256', $this->password) === $userEsa->PASS) {
-            if($userEsa->google2fa_enable) {
-                session()->put('user-esa-from-2fa', $userEsa);
-                if($userEsa->google2fa_secret) {
-                    $this->dispatch('activateCode');
-                } else {
-                    session()->flash('2fa-auth');
-                    $this->redirect(route('two-factor'));
-                }
-            } else {
+
+            $dayTimeOutFa = Setting::where('key', '=', '2fa_timeout')
+            ->value('value');
+            $timeOut2FA = Carbon::parse($userEsa->google2fa_timeout)->addDays((int) $dayTimeOutFa);
+            
+            if(!$userEsa->google2fa_enable || ($userEsa->google2fa_enable && !empty($userEsa->google2fa_secret) && Carbon::now()->isBefore($timeOut2FA))) {
                 $this->userEsa = $userEsa;
                 $this->dispatch('openSelectPurposeModal');
+                return;
             }
+            
+            if(($userEsa->google2fa_enable && !empty($userEsa->google2fa_secret) && Carbon::now()->isAfter($timeOut2FA))) {
+                $this->dispatch('activateCode');
+                return;
+            }
+            
+            session()->put('user-esa-from-2fa', $userEsa);
+            session()->flash('2fa-auth');
+            $this->redirect(route('two-factor'));
+
         } else {
             $this->dispatch('errorModal', title: 'Gagal', text: 'NIK atau Password Salah', icon: 'error');
         }
@@ -57,6 +72,8 @@ class LoginLivewire extends Component
     public function confirmActivateCode($activateCode)
     {
         $user = session()->get('user-esa-from-2fa');
+        $user->google2fa_timeout = Carbon::now();
+        $user->save();
 
         $google2fa = app('pragmarx.google2fa');
         
