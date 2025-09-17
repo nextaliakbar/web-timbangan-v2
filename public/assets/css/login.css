@@ -1,0 +1,48 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.login-form-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+}
+
+.login-form {
+    padding: 2.5rem 2rem;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.login-logo {
+    max-width: 180px;
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    height: calc(1.5em + .75rem + 5px);
+}
+
+.input-group-text {
+    background-color: transparent;
+    border-right: 0;
+}
+
+.input-group input {
+    border-left: 0;
+}
+
+.btn-login {
+    padding: 10px;
+}

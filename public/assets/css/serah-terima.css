@@ -1,0 +1,28 @@
+.card-header-tabs {
+    margin-right: auto;
+    margin-left: -0.625rem;
+}
+@media (max-width: 768px) {
+    .main-header .btn {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.5rem;
+    }
+    .content-header h1 {
+    font-size: 1.5rem;
+    }
+    .card-header {
+    flex-direction: column;
+    }
+    .card-tools {
+    width: 100%;
+    margin-top: 15px;
+    margin-left: 0 !important;
+    }
+    .card-tools .input-group {
+    width: 100% !important;
+    }
+    .card-header-tabs {
+    width: 100%;
+    margin-left: 0;
+    }
+}

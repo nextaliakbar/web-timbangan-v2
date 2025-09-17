@@ -1,0 +1,48 @@
+.table-highlight {
+    background-color: #f8f9fa;
+}
+.action-buttons .btn {
+    margin-right: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .content-header .row {
+    flex-direction: column;
+    align-items: flex-start;
+    }
+    .content-header .col-sm-6 {
+    width: 100%;
+    margin-bottom: 10px;
+    }
+    .content-header .justify-content-end {
+    justify-content: flex-start !important;
+    }
+    .card-filters {
+    flex-direction: column;
+    align-items: stretch !important;
+    }
+    .card-filters > * {
+    margin-bottom: 10px;
+    }
+    .card-filters .input-group, .card-filters .form-control {
+    width: 100% !important;
+    }
+    .card-filters .ml-auto {
+    margin-left: 0 !important;
+    }
+    .card-filters .d-flex {
+    flex-direction: column;
+    }
+    .card-filters .mr-2 {
+        margin-right: 0 !important;
+        margin-bottom: 10px;
+    }
+    .pagination-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .pagination-container p {
+        margin-bottom: 1rem;
+    }
+}

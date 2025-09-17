@@ -1,0 +1,62 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.two-factor-form-container {
+    width: 100%;
+    max-width: 380px;
+    padding: 15px;
+}
+
+.two-factor-form {
+    padding: 2.5rem 2rem;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.qr-container {
+    position: relative;
+    margin-top: 1.5rem;
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    align-content: center;
+}
+
+.qr-image {
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    opacity: 0.3;
+    display: block;
+}
+
+.activation-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    padding: 10px 5px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.spinner-border {
+    width: 5rem;
+    height: 5rem;
+}

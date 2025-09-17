@@ -1,0 +1,12 @@
+.filter-bar .form-control, .filter-bar .input-group {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+@media (min-width: 992px) {
+    .filter-bar .form-control, .filter-bar .input-group {
+    margin-bottom: 0;
+    }
+}
+.action-buttons .btn {
+    margin-right: 5px;
+}

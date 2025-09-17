@@ -1,0 +1,12 @@
+/* Atur custom class untuk input SweetAlert */
+.swal2-input.swal-input-custom {
+    /* Beri lebar, misalnya 80% dari lebar modal */
+    width: 80% !important; 
+    
+    /* Ini adalah kunci untuk menengahkan input */
+    margin-left: auto !important;
+    margin-right: auto !important;
+    
+    /* (Opsional) Tengahkan juga teks di dalam input */
+    text-align: center;
+}
