@@ -31,7 +31,7 @@ Untuk kebutuhan debugging atur APP_DEBUG=true dan tambahkan DEBUGBAR_ENABLED=tru
 <img src="Screenshot 2025-09-22 084748.png">
 
 
-## Scan Barcode 2FA
+## Two Factor Authentication (2FA)
 <img src="Screenshot 2025-09-22 084711.png">
 <img src="Screenshot 2025-09-22 084645.png">
 
