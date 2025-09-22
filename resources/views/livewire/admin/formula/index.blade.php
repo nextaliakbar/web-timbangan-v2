@@ -6,7 +6,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Laporan Hasil Input Formula <span class="badge bg-primary">Plant MGFI</span> <span class="badge bg-secondary">72</span></h1>
+            <h1>Laporan Hasil Input Formula 
+              <span class="badge bg-primary">
+              {{'Plant ' . strtoupper(request()->route()->parameter('plant'))}}
+              </span>
+              <span class="badge bg-secondary">{{$dataFormula->total()}}</span></h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->

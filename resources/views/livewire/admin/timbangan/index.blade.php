@@ -6,7 +6,9 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Laporan Hasil Input di Lapangan <span class="badge bg-primary">Plant UNIMOS</span></h1>
+            <h1>Laporan Hasil Input di Lapangan 
+                <span class="badge bg-primary">{{'Plant ' . strtoupper(request()->route()->parameter('plant'))}}</span>
+            </h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
