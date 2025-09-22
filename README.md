@@ -4,7 +4,8 @@
 
 ## Development
 - Pengembangan backend menggunakan Laravel 12
-- Pengembangan frontend menggunakan Livewire 3 
+- Pengembangan frontend menggunakan Livewire 3
+- Database menggunakan MySQL 
 
 
 ## Requirement / Kebutuhan

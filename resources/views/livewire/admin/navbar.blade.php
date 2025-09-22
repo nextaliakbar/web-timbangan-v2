@@ -26,9 +26,11 @@
             {{auth()->guard('admin')->user()->USER}} | {{auth()->guard('admin')->user()->userEsaRole->role}}
           </span>
           <div class="dropdown-divider"></div>
+          @if(auth()->guard('admin')->user()->userEsaRole->role == 'ADMIN')
           <button wire:click="refresh" class="dropdown-item">
             <i class="fas fa-cog mr-2"></i> Pengaturan 2FA
           </button>
+          @endif
           <button class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-sign-out-alt mr-2"></i> Keluar
           </button>
